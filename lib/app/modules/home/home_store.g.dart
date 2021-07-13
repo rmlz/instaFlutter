@@ -24,11 +24,11 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  final _$logoffAsyncAction = AsyncAction('HomeStoreBase.logoff');
+  final _$logffAsyncAction = AsyncAction('HomeStoreBase.logff');
 
   @override
-  Future<void> logoff() {
-    return _$logoffAsyncAction.run(() => super.logoff());
+  Future<void> logff() {
+    return _$logffAsyncAction.run(() => super.logff());
   }
 
   final _$HomeStoreBaseActionController =

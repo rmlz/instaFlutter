@@ -7,19 +7,20 @@ class LoginStore = _LoginStoreBase with _$LoginStore;
 abstract class _LoginStoreBase with Store {
 
   FirebaseAuth _firebaseAuth;
-  _LoginStoreBase(this._firebaseAuth){
-
+  _LoginStoreBase(this._firebaseAuth) {
+    _firebaseAuth.authStateChanges().listen(_onAuthChange);
   }
+
   @observable
   late User? user = _firebaseAuth.currentUser;
+
+  @observable
+  bool loading = false;
 
   @action
   void _onAuthChange(User? user) {
     this.user = user;
   }
-
-  @observable
-  bool loading = false;
 
   @action
   Future<void> loginWith({required String email, required String password}) async {
@@ -28,12 +29,11 @@ abstract class _LoginStoreBase with Store {
     }
     loading = true;
     await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-
     loading = false;
   }
 
   @action
-  Future<void> redefinePass({required String email}) async {
+  Future<void> resetPassword({required String email}) async {
     loading = true;
     await _firebaseAuth.sendPasswordResetEmail(email: email);
     loading = false;

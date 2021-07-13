@@ -21,7 +21,8 @@ abstract class HomeStoreBase with Store {
   }
 
   @action
-  Future<void> logoff() async {
+  Future<void> logff() async {
     await _firebaseAuth.signOut();
   }
+
 }

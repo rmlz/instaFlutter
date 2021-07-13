@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instaflutter/app/modules/home/home_store.dart';
 
 class FeedPage extends StatefulWidget {
   final String title;
@@ -8,7 +6,7 @@ class FeedPage extends StatefulWidget {
   @override
   FeedPageState createState() => FeedPageState();
 }
-class FeedPageState extends ModularState<FeedPage, HomeStore> {
+class FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +14,7 @@ class FeedPageState extends ModularState<FeedPage, HomeStore> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: [
-          Text('FEED', style: Theme.of(context).textTheme.headline1?.copyWith(fontSize: 32)
-          )],
+        children: <Widget>[],
       ),
     );
   }

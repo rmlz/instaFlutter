@@ -14,9 +14,7 @@ class SearchPageState extends State<SearchPage> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: [
-          Text('SEARCH', style: Theme.of(context).textTheme.headline1?.copyWith(fontSize: 32))
-        ],
+        children: <Widget>[],
       ),
     );
   }

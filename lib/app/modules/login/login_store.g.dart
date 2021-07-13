@@ -47,12 +47,13 @@ mixin _$LoginStore on _LoginStoreBase, Store {
         .run(() => super.loginWith(email: email, password: password));
   }
 
-  final _$redefinePassAsyncAction = AsyncAction('_LoginStoreBase.redefinePass');
+  final _$resetPasswordAsyncAction =
+      AsyncAction('_LoginStoreBase.resetPassword');
 
   @override
-  Future<void> redefinePass({required String email}) {
-    return _$redefinePassAsyncAction
-        .run(() => super.redefinePass(email: email));
+  Future<void> resetPassword({required String email}) {
+    return _$resetPasswordAsyncAction
+        .run(() => super.resetPassword(email: email));
   }
 
   final _$_LoginStoreBaseActionController =

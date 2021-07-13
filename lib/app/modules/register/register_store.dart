@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instaflutter/app/constants.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'register_store.g.dart';
 
@@ -7,7 +9,8 @@ class RegisterStore = _RegisterStoreBase with _$RegisterStore;
 abstract class _RegisterStoreBase with Store {
 
   FirebaseAuth _firebaseAuth;
-  _RegisterStoreBase(this._firebaseAuth) {
+  SharedPreferences _sharedPreferences;
+  _RegisterStoreBase(this._firebaseAuth, this._sharedPreferences) {
     _firebaseAuth.authStateChanges().listen(_onAuthChange);
   }
 
@@ -17,10 +20,11 @@ abstract class _RegisterStoreBase with Store {
   @observable
   bool loading = false;
 
+  @action
   void _onAuthChange(User? user) {
-    if (user?.isAnonymous ?? true) {
+    if (user?.isAnonymous ?? true) { //elvis operator
       this.user = null;
-    } else {
+    }else {
       this.user = user;
     }
   }
@@ -28,9 +32,11 @@ abstract class _RegisterStoreBase with Store {
   @action
   Future<void> registerUser({required String name, required String email, required String password}) async {
     loading = true;
-        final credential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    final credential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
     _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
     await credential.user?.updateDisplayName(name);
+    _sharedPreferences.setBool(Constants.SPK_REGISTER_DONE, true);
     loading = false;
   }
+
 }

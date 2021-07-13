@@ -14,9 +14,7 @@ class ProfilePageState extends State<ProfilePage> {
         title: Text(widget.title),
       ),
       body: Column(
-          children: [
-            Text('PROFILE', style: Theme.of(context).textTheme.headline1?.copyWith(fontSize: 32))
-          ],
+        children: <Widget>[],
       ),
     );
   }

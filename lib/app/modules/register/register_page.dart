@@ -21,6 +21,8 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
   late TextEditingController _passwordController;
   late final ReactionDisposer _disposer;
 
+  late final ReactionDisposer _disposer;
+
   @override
   void initState() {
     super.initState();
@@ -29,9 +31,11 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
     _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    
+
     _disposer = when(
-        (_) => store.user != null, () => Modular.to.pushReplacementNamed(Constants.Routes.HOME));
+      (_) => store.user != null,
+      () => Modular.to.pushReplacementNamed(Constants.Routes.HOME)
+    );
   }
 
   @override
@@ -39,7 +43,7 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
     _disposer();
     super.dispose();
   }
-  
+
   late final Widget _form = PageView(
     controller: _pageController,
     scrollDirection: Axis.vertical,
@@ -68,8 +72,11 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
         label: 'Crie uma senha',
         isPassword: true,
         onNext: () {
-          store.registerUser(name: _nameController.text, email: _emailController.text, password: _passwordController.text);
-
+          store.registerUser(
+              name: _nameController.text,
+              email: _emailController.text,
+              password: _passwordController.text
+          );
         },
         onBack: () {
           _pageController.previousPage(duration: Duration(seconds: 1), curve: Curves.easeInOut);
@@ -87,21 +94,21 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
       body: Observer(
         builder: (_) {
           if (store.loading) {
-            return Container(
+            return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
-                  Text("Aguarde um segundo, estamos salvando seu cadastro!")
-                ]
-              )
+                  Text('Aguarde... salvando seu cadastro...')
+                ],
+              ),
             );
           }
           return _form;
         },
-      ) ,
+      ),
     );
   }
 }

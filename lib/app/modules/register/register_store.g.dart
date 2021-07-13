@@ -49,6 +49,20 @@ mixin _$RegisterStore on _RegisterStoreBase, Store {
         () => super.registerUser(name: name, email: email, password: password));
   }
 
+  final _$_RegisterStoreBaseActionController =
+      ActionController(name: '_RegisterStoreBase');
+
+  @override
+  void _onAuthChange(User? user) {
+    final _$actionInfo = _$_RegisterStoreBaseActionController.startAction(
+        name: '_RegisterStoreBase._onAuthChange');
+    try {
+      return super._onAuthChange(user);
+    } finally {
+      _$_RegisterStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
