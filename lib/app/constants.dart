@@ -11,5 +11,11 @@ class _Routes {
 
   final ONBOARDING = '/onboarding';
   final REGISTER = '/register';
+  final HOME = '/home';
+  final LOGIN = '/login';
+  final FORGOT_PASSWORD = '/login/forgotpassword';
+  final FEED = '/feed';
+  final SEARCH = '/search';
+  final PROFILE = '/profile';
 
 }
