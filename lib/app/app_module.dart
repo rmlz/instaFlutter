@@ -1,3 +1,4 @@
+import 'package:instaflutter/app/modules/profile/profile_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,6 @@ import 'modules/home/home_module.dart';
 import 'modules/login/login_module.dart';
 
 class AppModule extends Module {
-
   SharedPreferences _sharedPreferences;
   FirebaseApp _firebaseApp;
   AppModule(this._sharedPreferences, this._firebaseApp);
@@ -25,38 +25,44 @@ class AppModule extends Module {
 
   @override
   List<Bind> get binds => [
-    Bind.singleton((i) => _sharedPreferences),
-    Bind.instance(_firebaseApp),
-    Bind.factory((i) => FirebaseAuth.instance),
-  ];
+        Bind.singleton((i) => _sharedPreferences),
+        Bind.instance(_firebaseApp),
+        Bind.factory((i) => FirebaseAuth.instance),
+      ];
 
   @override
   List<ModularRoute> get routes => [
-    //Modular.initialRoute == /
-    ModuleRoute(Modular.initialRoute, module: _initialModule()),
-    ModuleRoute(Constants.Routes.ONBOARDING, module: OnboardingModule()),
-    ModuleRoute(Constants.Routes.REGISTER, module: RegisterModule(), transition: TransitionType.rightToLeftWithFade),
-    ModuleRoute(Constants.Routes.LOGIN, module: LoginModule()),
+        //Modular.initialRoute == /
+        ModuleRoute(Modular.initialRoute, module: _initialModule()),
+        ModuleRoute(Constants.Routes.ONBOARDING, module: OnboardingModule()),
+        ModuleRoute(Constants.Routes.REGISTER,
+            module: RegisterModule(),
+            transition: TransitionType.rightToLeftWithFade),
+        ModuleRoute(Constants.Routes.LOGIN, module: LoginModule()),
 
-    ModuleRoute(Constants.Routes.HOME, module: HomeModule(), guards: [_routeGuard]),
-    ModuleRoute(Constants.Routes.FEED, module: FeedModule(), guards: [_routeGuard]),
-    ModuleRoute(Constants.Routes.SEARCH, module: SearchModule(), guards: [_routeGuard]),
-    ModuleRoute(Constants.Routes.PROFILE, module: ProfileModule(), guards: [_routeGuard]),
-  ];
+        ModuleRoute(Constants.Routes.HOME,
+            module: HomeModule(), guards: [_routeGuard]),
+        ModuleRoute(Constants.Routes.FEED,
+            module: FeedModule(), guards: [_routeGuard]),
+        ModuleRoute(Constants.Routes.SEARCH,
+            module: SearchModule(), guards: [_routeGuard]),
+        ModuleRoute(Constants.Routes.PROFILE,
+            module: ProfileModule(), guards: [_routeGuard]),
+      ];
 
   Module _initialModule() {
-    final onboardingDone = _sharedPreferences.getBool(Constants.SPK_ONBOARDING_DONE) ?? false;
+    final onboardingDone =
+        _sharedPreferences.getBool(Constants.SPK_ONBOARDING_DONE) ?? false;
     if (onboardingDone) {
-      final registerDone = _sharedPreferences.getBool(Constants.SPK_REGISTER_DONE) ?? false;
+      final registerDone =
+          _sharedPreferences.getBool(Constants.SPK_REGISTER_DONE) ?? false;
       if (registerDone) {
         return LoginModule();
-      }else {
+      } else {
         return RegisterModule();
       }
-    }else {
+    } else {
       return OnboardingModule();
     }
   }
-
-
 }

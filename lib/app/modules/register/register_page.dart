@@ -21,8 +21,6 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
   late TextEditingController _passwordController;
   late final ReactionDisposer _disposer;
 
-  late final ReactionDisposer _disposer;
-
   @override
   void initState() {
     super.initState();

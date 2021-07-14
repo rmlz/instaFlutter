@@ -6,7 +6,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Slidy',
+      title: 'Instamon',
       theme: lightTheme,
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,

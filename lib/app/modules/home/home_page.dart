@@ -25,8 +25,6 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     tapMudarTela(_currentIndex);
   }
 
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

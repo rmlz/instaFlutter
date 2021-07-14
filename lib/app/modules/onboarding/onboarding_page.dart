@@ -30,15 +30,15 @@ class OnboardingPageState extends ModularState<OnboardingPage, OnboardingStore> 
         children: [
           _OnboardingItem(
             image: AssetImage('assets/social_life.png'),
-            text: 'Compartilhe e veja fotos dos seus amigos!'
+            text: 'Já imaginou você ter uma rede social sem algorítmo?!'
           ),
           _OnboardingItem(
             image: AssetImage('assets/selfie.png'),
-            text: 'Aqui sua selfie faz o maior sucesso!'
+            text: 'Aqui você posta e a gente mostra pra quem te segue!'
           ),
           _OnboardingItem(
             image: AssetImage('assets/influencer.png'),
-            text: 'Torne-se um grande influenciador digital!',
+            text: 'Seja o maior influenciador digital do App!',
             child: Column(
               children: [
                 SizedBox(height: 24),
