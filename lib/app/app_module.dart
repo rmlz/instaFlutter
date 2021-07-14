@@ -1,7 +1,7 @@
-import 'package:instaflutter/app/modules/profile/profile_store.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:instaflutter/app/constants.dart';
 import 'package:instaflutter/app/shared/util/app_route_guard.dart';
@@ -28,6 +28,8 @@ class AppModule extends Module {
         Bind.singleton((i) => _sharedPreferences),
         Bind.instance(_firebaseApp),
         Bind.factory((i) => FirebaseAuth.instance),
+        Bind.factory((i) => FirebaseFirestore.instance),
+        Bind.factory((i) => FirebaseStorage.instance)
       ];
 
   @override

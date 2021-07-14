@@ -46,6 +46,7 @@ class OnboardingPageState extends ModularState<OnboardingPage, OnboardingStore> 
                   child: Text('CADASTRE-SE'),
                   onPressed: () {
                     store.markOnboardingDone();
+                    store.markRegisterDone();
                     Modular.to.pushReplacementNamed(Constants.Routes.REGISTER);
                   },
                 ),
@@ -53,7 +54,7 @@ class OnboardingPageState extends ModularState<OnboardingPage, OnboardingStore> 
                   child: Text('Já tem cadastro?'),
                   onPressed: () {
                     store.markOnboardingDone();
-                    Modular.to.pushNamed(Constants.Routes.LOGIN);
+                    Modular.to.pushReplacementNamed(Constants.Routes.LOGIN);
                   },
                 )
               ],
