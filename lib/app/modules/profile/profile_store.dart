@@ -39,6 +39,14 @@ abstract class _ProfileStoreBase with Store {
     @observable
     FirebaseException? error;
 
+    @computed
+    Stream<QuerySnapshot> get posts {
+        return firebaseFirestore.collection('posts')
+            .where('userId', isEqualTo: firebaseAuth.currentUser!.uid)
+            .orderBy('dateTime', descending: true)
+            .snapshots();
+    }
+
     void _onUserChange(User? user) {
         this.user = user;
         if (user != null) {
@@ -94,7 +102,22 @@ abstract class _ProfileStoreBase with Store {
         }, SetOptions(merge: true));
 
         loading = false;
+    }
 
+    Future<void> postPicture(String filePath) async {
+        loading = true;
+
+        final userRef = await firebaseFirestore.doc('user/${user!.uid}');
+        final file = File(filePath);
+        final task = await firebaseStorage.ref('${user!.uid}/upload/post_${DateTime.now().millisecond}.jpg').putFile(file);
+        final url = await task.ref.getDownloadURL();
+        
+        firebaseFirestore.collection('posts').add({
+            'userId': user!.uid,
+            'dateTime': DateTime.now().toIso8601String(),
+            'url': url
+        });
+        loading = false;
     }
 
 

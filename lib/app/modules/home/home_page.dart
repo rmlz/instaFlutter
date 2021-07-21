@@ -33,18 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
         showUnselectedLabels: false,
         showSelectedLabels: false,
         currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          print(Modular.to.path);
-          switch (index) {
-            case 0: Modular.to.navigate('/home/feed'); break;
-            case 1: Modular.to.navigate(Constants.Routes.SEARCH); break;
-            case 2: Modular.to.navigate(Constants.Routes.PROFILE); break;
-            default: break;
-          }
-        },
+        onTap: tapMudarTela,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
@@ -69,9 +58,9 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       });
       print(Modular.to.path);
       switch (index) {
-        case 0: { log('FEED ${index}'); Modular.to.navigate('/home/feed'); break; }
-        case 1: { log('SEARCH ${index}'); Modular.to.navigate('/home/search'); break; }
-        case 2: { log('PROFILE ${index}'); Modular.to.navigate('/home/profile'); break; }
+        case 0: Modular.to.navigate('${Constants.Routes.HOME}${Constants.Routes.FEED}'); break;
+        case 1: Modular.to.navigate('${Constants.Routes.HOME}${Constants.Routes.SEARCH}'); break;
+        case 2: Modular.to.navigate('${Constants.Routes.HOME}${Constants.Routes.PROFILE}'); break;
         default: break;
       }
     }

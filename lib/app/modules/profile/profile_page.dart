@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,75 +23,94 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
   late final ImagePicker _picker;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     _picker = ImagePicker();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Perfil'),
         actions: [
-          IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        padding: EdgeInsets.all(24),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            InkWell(
-                              child: Row(
-                                children: [
-                                  Icon(Icons.camera_alt_outlined),
-                                  SizedBox(
-                                    width: 16,
+          Observer(
+            builder: (_) {
+              if (store.loading) {
+                return Container(
+                  child: Center(
+                    child: Transform.scale(
+                        scale: 0.5,
+                        child: CircularProgressIndicator(
+                            color: Theme.of(context).buttonColor)),
+                  ),
+                );
+              }
+              return IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            padding: EdgeInsets.all(24),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.camera_alt_outlined),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Text("Usar a câmera")
+                                    ],
                                   ),
-                                  Text("Usar a câmera")
-                                ],
-                              ),
-                              onTap: () async {
-                                final picturePath = await _picker.pickImage(
-                                    source: ImageSource.camera,
-                                    imageQuality: 50,
-                                    maxWidth: 1920,
-                                    maxHeight: 1280);
-                                if (picturePath != null) {
-                                  //store.sendPicture(picturePath.path);
-                                }
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            InkWell(
-                              child: Row(
-                                children: [
-                                  Icon(Icons.photo_library_outlined),
-                                  SizedBox(
-                                    width: 16,
+                                  onTap: () async {
+                                    final picturePath = await _picker.pickImage(
+                                        source: ImageSource.camera,
+                                        imageQuality: 50,
+                                        maxWidth: 1920,
+                                        maxHeight: 1280);
+                                    if (picturePath != null) {
+                                      store.postPicture(picturePath.path);
+                                    }
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 24,
+                                ),
+                                InkWell(
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.photo_library_outlined),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Text("Buscar na galeria")
+                                    ],
                                   ),
-                                  Text("Buscar na galeria")
-                                ],
-                              ),
-                              onTap: () async {
-                                final picturePath = await _picker.pickImage(
-                                    source: ImageSource.gallery,
-                                    imageQuality: 50,
-                                    maxWidth: 1920,
-                                    maxHeight: 1280);
-                                if (picturePath != null) {
-                                  //store.sendPicture(picturePath.path);
-                                }
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                        ),
-                      );
-                    });
-              },
-              icon: Icon(Icons.photo_camera))
+                                  onTap: () async {
+                                    final picturePath = await _picker.pickImage(
+                                        source: ImageSource.gallery,
+                                        imageQuality: 50,
+                                        maxWidth: 1920,
+                                        maxHeight: 1280);
+                                    if (picturePath != null) {
+                                      store.postPicture(picturePath.path);
+                                    }
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  icon: Icon(Icons.photo_camera));
+            },
+          )
         ],
       ),
       body: ListView(
@@ -113,49 +133,40 @@ class _photoGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
-      child: GridView.count(
-        crossAxisCount: 3,
-        mainAxisSpacing: 1,
-        crossAxisSpacing: 1,
-        childAspectRatio: 1,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-          Image.network(
-              'https://picsum.photos/seed/${DateTime.now().microsecond}/200/200'),
-        ],
+      child: StreamBuilder(
+        stream: store.posts,
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Deu pau!");
+          }
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              store.user == null ||
+              store.loading) {
+            return Container(
+              child: Center(
+                child: Transform.scale(
+                    scale: 0.5,
+                    child: CircularProgressIndicator(
+                        color: Theme.of(context).buttonColor)),
+              ),
+            );
+          }
+          if (snapshot.hasData && snapshot.data!.docs.length > 0) {
+            final posts = snapshot.data!.docs;
+            return GridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 1,
+                crossAxisSpacing: 1,
+                childAspectRatio: 1,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: posts.map((posts) {
+                  final data = posts.data();
+                  return Image.network(posts['url'], fit: BoxFit.cover);
+                }).toList());
+          }
+          return Container();
+        },
       ),
     );
   }

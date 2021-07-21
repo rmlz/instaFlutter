@@ -24,7 +24,7 @@ class EditPageState extends ModularState<EditPage, ProfileStore> {
     super.initState();
     _nameController = TextEditingController(text: store.user?.displayName);
     _bioController = TextEditingController(text: store.bio);
-
+    _picker = ImagePicker();
     reaction((_) => store.user, (_) {
       _nameController.text = store.user?.displayName ?? '';
     });
@@ -38,7 +38,7 @@ class EditPageState extends ModularState<EditPage, ProfileStore> {
 
   @override
   Widget build(BuildContext context) {
-    _picker = ImagePicker();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Editar Perfil'),
