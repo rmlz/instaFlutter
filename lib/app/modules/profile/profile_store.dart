@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 part 'profile_store.g.dart';
@@ -26,6 +28,9 @@ abstract class _ProfileStoreBase with Store {
     User? user;
 
     @observable
+    String? username;
+
+    @observable
     String? bio;
 
     @observable
@@ -42,10 +47,12 @@ abstract class _ProfileStoreBase with Store {
         }
     }
 
+
     @action
     void _listenUser(DocumentSnapshot<Map<String, dynamic>> snapshot) {
         if (snapshot.exists) {
-            bio = snapshot.data()?['bio'] as String;
+            this.bio = snapshot.data()?['bio'] as String;
+            this.username = snapshot.data()?['displayName'] as String;
         }
     }
 
@@ -61,7 +68,8 @@ abstract class _ProfileStoreBase with Store {
                 'displayName': displayName,
                 'bio': bio
             }, SetOptions(merge: true)).then((_) async => {
-                await firebaseAuth.currentUser?.updateDisplayName(displayName).then((value) => log('Nome foi atualizado'))
+                log(displayName),
+                await firebaseAuth.currentUser?.updateDisplayName(displayName).then((_) => log('Nome foi atualizado'))
             });
 
 
@@ -70,6 +78,25 @@ abstract class _ProfileStoreBase with Store {
             log('ERRO', error: e);
         }
     }
+
+    @action
+    Future<void> updateProfilePicture(String filePath) async {
+        loading = true;
+        final userRef = await firebaseFirestore.doc('user/${user!.uid}');
+        final file = File(filePath);
+        final task = await firebaseStorage.ref('${user!.uid}/profilePicture.jpg').putFile(file);
+        final url = await task.ref.getDownloadURL();
+        
+        firebaseAuth.currentUser?.updatePhotoURL(url);
+
+        await userRef.set({
+            'profilePicture': url
+        }, SetOptions(merge: true));
+
+        loading = false;
+
+    }
+
 
 
 }

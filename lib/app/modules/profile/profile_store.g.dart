@@ -24,6 +24,21 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
     });
   }
 
+  final _$usernameAtom = Atom(name: '_ProfileStoreBase.username');
+
+  @override
+  String? get username {
+    _$usernameAtom.reportRead();
+    return super.username;
+  }
+
+  @override
+  set username(String? value) {
+    _$usernameAtom.reportWrite(value, super.username, () {
+      super.username = value;
+    });
+  }
+
   final _$bioAtom = Atom(name: '_ProfileStoreBase.bio');
 
   @override
@@ -79,6 +94,15 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
         .run(() => super.updateProfile(displayName: displayName, bio: bio));
   }
 
+  final _$updateProfilePictureAsyncAction =
+      AsyncAction('_ProfileStoreBase.updateProfilePicture');
+
+  @override
+  Future<void> updateProfilePicture(String filePath) {
+    return _$updateProfilePictureAsyncAction
+        .run(() => super.updateProfilePicture(filePath));
+  }
+
   final _$_ProfileStoreBaseActionController =
       ActionController(name: '_ProfileStoreBase');
 
@@ -97,6 +121,7 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
   String toString() {
     return '''
 user: ${user},
+username: ${username},
 bio: ${bio},
 loading: ${loading},
 error: ${error}
