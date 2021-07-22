@@ -110,7 +110,13 @@ class ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                   },
                   icon: Icon(Icons.photo_camera));
             },
-          )
+          ),
+          IconButton(
+              onPressed: () {
+                store.logout().then(
+                    (_) => Modular.to.popAndPushNamed(Constants.Routes.LOGIN));
+              },
+              icon: Icon(Icons.logout))
         ],
       ),
       body: ListView(
@@ -153,6 +159,7 @@ class _photoGrid extends StatelessWidget {
           }
           if (snapshot.hasData && snapshot.data!.docs.length > 0) {
             final posts = snapshot.data!.docs;
+            store.setPostCount(posts.length);
             return GridView.count(
                 crossAxisCount: 3,
                 mainAxisSpacing: 1,
@@ -217,28 +224,38 @@ class _topInfo extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              Text('100',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold)),
+                              Observer(
+                                builder: (_) {
+                                  return Text(store.postCount.toString() ?? '0',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold));
+                                },
+                              ),
                               Text('Fotos', style: TextStyle(fontSize: 12)),
                             ],
                           ),
                           Column(
                             children: [
-                              Text('200',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold)),
+                              Observer(
+                                builder: (_) {
+                                  return Text('${store.following ?? 0}',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold));
+                                },
+                              ),
                               Text('Seguindo', style: TextStyle(fontSize: 12)),
                             ],
                           ),
                           Column(
                             children: [
-                              Text('100',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold)),
+                              Observer(builder: (_) {
+                                return Text('${store.followers ?? 0}',
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold));
+                              }),
                               Text('Seguidores',
                                   style: TextStyle(fontSize: 12)),
                             ],
@@ -277,12 +294,20 @@ class _topInfo extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 1),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Observer(
                   builder: (_) {
-                    return Text(
-                      store.bio ?? '',
-                      style: TextStyle(fontSize: 16),
+                    return Container(
+                      width: MediaQuery.of(context).size.width - 24 - 72 - 12,
+                      child: Text(
+                        store.bio ?? '',
+                        style: TextStyle(fontSize: 16),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                      ),
                     );
                   },
                 )

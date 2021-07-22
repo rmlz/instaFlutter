@@ -62,6 +62,51 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
     });
   }
 
+  final _$followingAtom = Atom(name: '_ProfileStoreBase.following');
+
+  @override
+  int? get following {
+    _$followingAtom.reportRead();
+    return super.following;
+  }
+
+  @override
+  set following(int? value) {
+    _$followingAtom.reportWrite(value, super.following, () {
+      super.following = value;
+    });
+  }
+
+  final _$followersAtom = Atom(name: '_ProfileStoreBase.followers');
+
+  @override
+  int? get followers {
+    _$followersAtom.reportRead();
+    return super.followers;
+  }
+
+  @override
+  set followers(int? value) {
+    _$followersAtom.reportWrite(value, super.followers, () {
+      super.followers = value;
+    });
+  }
+
+  final _$postCountAtom = Atom(name: '_ProfileStoreBase.postCount');
+
+  @override
+  int? get postCount {
+    _$postCountAtom.reportRead();
+    return super.postCount;
+  }
+
+  @override
+  set postCount(int? value) {
+    _$postCountAtom.reportWrite(value, super.postCount, () {
+      super.postCount = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_ProfileStoreBase.loading');
 
   @override
@@ -111,6 +156,13 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
         .run(() => super.updateProfilePicture(filePath));
   }
 
+  final _$postPictureAsyncAction = AsyncAction('_ProfileStoreBase.postPicture');
+
+  @override
+  Future<void> postPicture(String filePath) {
+    return _$postPictureAsyncAction.run(() => super.postPicture(filePath));
+  }
+
   final _$_ProfileStoreBaseActionController =
       ActionController(name: '_ProfileStoreBase');
 
@@ -126,11 +178,36 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
   }
 
   @override
+  Future<void> logout() {
+    final _$actionInfo = _$_ProfileStoreBaseActionController.startAction(
+        name: '_ProfileStoreBase.logout');
+    try {
+      return super.logout();
+    } finally {
+      _$_ProfileStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPostCount(int count) {
+    final _$actionInfo = _$_ProfileStoreBaseActionController.startAction(
+        name: '_ProfileStoreBase.setPostCount');
+    try {
+      return super.setPostCount(count);
+    } finally {
+      _$_ProfileStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 user: ${user},
 username: ${username},
 bio: ${bio},
+following: ${following},
+followers: ${followers},
+postCount: ${postCount},
 loading: ${loading},
 error: ${error},
 posts: ${posts}

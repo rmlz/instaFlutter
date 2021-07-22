@@ -8,12 +8,13 @@ import 'package:mobx/mobx.dart';
 
 class RegisterPage extends StatefulWidget {
   final String title;
-  const RegisterPage({Key? key, this.title = 'Faça seu cadastro!'}) : super(key: key);
+  const RegisterPage({Key? key, this.title = 'Faça seu cadastro!'})
+      : super(key: key);
   @override
   RegisterPageState createState() => RegisterPageState();
 }
-class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
 
+class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
   late PageController _pageController;
 
   late TextEditingController _nameController;
@@ -30,10 +31,8 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
 
-    _disposer = when(
-      (_) => store.user != null,
-      () => Modular.to.pushReplacementNamed(Constants.Routes.HOME)
-    );
+    _disposer = when((_) => store.user != null,
+        () => Modular.to.pushReplacementNamed(Constants.Routes.HOME));
   }
 
   @override
@@ -52,17 +51,23 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
         label: 'Qual é o seu nome?',
         showsBackButton: false,
         onNext: () {
-          _pageController.nextPage(duration: Duration(seconds: 1), curve: Curves.easeInOut);
+          _pageController.nextPage(
+              duration: Duration(seconds: 1), curve: Curves.easeInOut);
+        },
+        onBack: () {
+          Modular.to.navigate(Constants.Routes.LOGIN);
         },
       ),
       _FormField(
         controller: _emailController,
         label: 'Qual é o seu melhor e-mail?',
         onNext: () {
-          _pageController.nextPage(duration: Duration(seconds: 1), curve: Curves.easeInOut);
+          _pageController.nextPage(
+              duration: Duration(seconds: 1), curve: Curves.easeInOut);
         },
         onBack: () {
-          _pageController.previousPage(duration: Duration(seconds: 1), curve: Curves.easeInOut);
+          _pageController.previousPage(
+              duration: Duration(seconds: 1), curve: Curves.easeInOut);
         },
       ),
       _FormField(
@@ -73,11 +78,11 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
           store.registerUser(
               name: _nameController.text,
               email: _emailController.text,
-              password: _passwordController.text
-          );
+              password: _passwordController.text);
         },
         onBack: () {
-          _pageController.previousPage(duration: Duration(seconds: 1), curve: Curves.easeInOut);
+          _pageController.previousPage(
+              duration: Duration(seconds: 1), curve: Curves.easeInOut);
         },
       ),
     ],
@@ -112,7 +117,6 @@ class RegisterPageState extends ModularState<RegisterPage, RegisterStore> {
 }
 
 class _FormField extends StatelessWidget {
-
   final String label;
   final VoidCallback onNext;
   final VoidCallback? onBack;
@@ -120,14 +124,13 @@ class _FormField extends StatelessWidget {
   final bool isPassword;
   final TextEditingController controller;
 
-  _FormField({
-    required this.label,
-    required this.onNext,
-    this.onBack,
-    this.showsBackButton = true,
-    this.isPassword = false,
-    required this.controller
-  });
+  _FormField(
+      {required this.label,
+      required this.onNext,
+      this.onBack,
+      this.showsBackButton = true,
+      this.isPassword = false,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +151,10 @@ class _FormField extends StatelessWidget {
                   fit: BoxFit.fitWidth,
                   child: Text(
                     label,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 40),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1!
+                        .copyWith(fontSize: 40),
                     maxLines: 1,
                   ),
                 ),
@@ -157,7 +163,14 @@ class _FormField extends StatelessWidget {
                   onEditingComplete: onNext,
                   style: TextStyle(fontSize: 32),
                   obscureText: isPassword,
-                )
+                ),
+                !showsBackButton
+                    ? TextButton(
+                        onPressed: () {
+                          Modular.to.navigate(Constants.Routes.LOGIN);
+                        },
+                        child: Text('Já tenho cadastro'))
+                    : Container(),
               ],
             ),
           ),
@@ -169,5 +182,4 @@ class _FormField extends StatelessWidget {
   Widget _backButton() {
     return IconButton(onPressed: onBack, icon: Icon(Icons.arrow_upward));
   }
-
 }

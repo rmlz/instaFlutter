@@ -1,16 +1,14 @@
 abstract class Constants {
-
   //SPK = Shared Preferences Key
   static const SPK_ONBOARDING_DONE = 'OnboardingDone';
   static const SPK_REGISTER_DONE = 'RegisterDone';
 
   static final Routes = _Routes();
   static final Pictures = _Pictures();
-
+  static final Collections = _Collections();
 }
 
 class _Routes {
-
   final HOME = '/home';
   final ONBOARDING = '/onboarding';
   final REGISTER = '/register';
@@ -21,12 +19,14 @@ class _Routes {
   final SEARCH = '/search';
   final PROFILE = '/profile';
   final EDIT_PROFILE = '/edit_profile';
-
 }
 
 class _Pictures {
-
   final LOGIN = 'assets/login.png';
   final FORGOT_PASSWORD = 'assets/forgot_password.png';
+}
 
+class _Collections {
+  final USERS = 'user';
+  final POSTS = 'posts';
 }

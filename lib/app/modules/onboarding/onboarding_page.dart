@@ -5,12 +5,14 @@ import 'package:instaflutter/app/modules/onboarding/onboarding_store.dart';
 
 class OnboardingPage extends StatefulWidget {
   final String title;
-  const OnboardingPage({Key? key, this.title = 'Instaflutter'}) : super(key: key);
+  const OnboardingPage({Key? key, this.title = 'Instaflutter'})
+      : super(key: key);
   @override
   OnboardingPageState createState() => OnboardingPageState();
 }
-class OnboardingPageState extends ModularState<OnboardingPage, OnboardingStore> {
 
+class OnboardingPageState
+    extends ModularState<OnboardingPage, OnboardingStore> {
   late PageController _pageController;
 
   @override
@@ -29,13 +31,11 @@ class OnboardingPageState extends ModularState<OnboardingPage, OnboardingStore> 
         controller: _pageController,
         children: [
           _OnboardingItem(
-            image: AssetImage('assets/social_life.png'),
-            text: 'Já imaginou você ter uma rede social sem algorítmo?!'
-          ),
+              image: AssetImage('assets/social_life.png'),
+              text: 'Já imaginou você ter uma rede social sem algorítmo?!'),
           _OnboardingItem(
-            image: AssetImage('assets/selfie.png'),
-            text: 'Aqui você posta e a gente mostra pra quem te segue!'
-          ),
+              image: AssetImage('assets/selfie.png'),
+              text: 'Aqui você posta e a gente mostra pra quem te segue!'),
           _OnboardingItem(
             image: AssetImage('assets/influencer.png'),
             text: 'Seja o maior influenciador digital do App!',
@@ -67,7 +67,6 @@ class OnboardingPageState extends ModularState<OnboardingPage, OnboardingStore> 
 }
 
 class _OnboardingItem extends StatelessWidget {
-
   final ImageProvider image;
   final String text;
   final Widget? child;
@@ -77,11 +76,10 @@ class _OnboardingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: 24,
-        right: 24,
-        top: 16,
-        bottom: MediaQuery.of(context).padding.bottom + 96
-      ),
+          left: 24,
+          right: 24,
+          top: 16,
+          bottom: MediaQuery.of(context).padding.bottom + 96),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -90,11 +88,9 @@ class _OnboardingItem extends StatelessWidget {
             child: Image(image: image, fit: BoxFit.fitWidth),
           ),
           SizedBox(height: 32),
-          Text(
-            text,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
-            textAlign: TextAlign.center
-          ),
+          Text(text,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
+              textAlign: TextAlign.center),
           child ?? SizedBox.fromSize(size: Size.zero)
         ],
       ),
