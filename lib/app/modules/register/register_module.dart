@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instaflutter/app/modules/register/register_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,7 +8,8 @@ import 'register_page.dart';
 class RegisterModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => RegisterStore(i.get<FirebaseAuth>(), i.get<SharedPreferences>())),
+    Bind.lazySingleton((i) => RegisterStore(i.get<FirebaseAuth>(),
+        i.get<SharedPreferences>(), i.get<FirebaseFirestore>())),
   ];
 
   @override

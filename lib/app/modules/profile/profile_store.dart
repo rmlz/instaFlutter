@@ -70,7 +70,7 @@ abstract class _ProfileStoreBase with Store {
       bio = data?['bio'] as String;
       username = data?['displayName'] as String;
       followers = data!.containsKey('followers') ? data['followers'].length : 0;
-      following = data!.containsKey('following') ? data['following'].length : 0;
+      following = data.containsKey('following') ? data['following'].length : 0;
     }
   }
 
@@ -90,11 +90,13 @@ abstract class _ProfileStoreBase with Store {
             log(displayName),
             await firebaseAuth.currentUser
                 ?.updateDisplayName(displayName)
-                .then((_) => log('Nome foi atualizado'))
+                .then((_) => log('Nome foi atualizado')),
+            loading = false
           });
     } on FirebaseException catch (e) {
       error = e;
       log('ERRO', error: e);
+      loading = false;
     }
   }
 

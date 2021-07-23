@@ -226,7 +226,10 @@ class _topInfo extends StatelessWidget {
                             children: [
                               Observer(
                                 builder: (_) {
-                                  return Text(store.postCount.toString() ?? '0',
+                                  return Text(
+                                      store.postCount != null
+                                          ? store.postCount.toString()
+                                          : '0',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold));

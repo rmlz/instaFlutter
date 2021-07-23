@@ -150,6 +150,13 @@ class _FormField extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.fitWidth,
                   child: Text(
+                    'Pressione ENTER para continuar.',
+                    style: Theme.of(context).textTheme.subtitle2!,
+                  ),
+                ),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
                     label,
                     style: Theme.of(context)
                         .textTheme
@@ -169,7 +176,7 @@ class _FormField extends StatelessWidget {
                         onPressed: () {
                           Modular.to.navigate(Constants.Routes.LOGIN);
                         },
-                        child: Text('Já tenho cadastro'))
+                        child: Text('Me leve ao Login! Já tenho cadastro'))
                     : Container(),
               ],
             ),

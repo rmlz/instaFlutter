@@ -50,6 +50,7 @@ class AppModule extends Module {
             module: SearchModule(), guards: [_routeGuard]),
         ModuleRoute(Constants.Routes.PROFILE,
             module: ProfileModule(), guards: [_routeGuard]),
+        ModuleRoute(Constant.Routes.Chat)
       ];
 
   Module _initialModule() {
