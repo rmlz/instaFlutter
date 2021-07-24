@@ -24,7 +24,7 @@ class ChatListPageState extends ModularState<ChatListPage, ChatStore> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: () {
-          Navigator.pushNamed(context, Constants.Routes.FEED);
+          Navigator.pushReplacementNamed(context, Constants.Routes.HOME);
         }),
         title: Text(widget.title),
       ),

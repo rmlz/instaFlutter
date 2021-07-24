@@ -61,7 +61,7 @@ class ChatPageState extends ModularState<ChatPage, ChatStore> {
         elevation: 0,
         leading: BackButton(
           onPressed: () {
-            Navigator.pushNamed(context, Constants.Routes.CHAT);
+            Navigator.pushReplacementNamed(context, Constants.Routes.CHAT);
           },
         ),
         title: FutureBuilder(
