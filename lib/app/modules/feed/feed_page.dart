@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:instaflutter/app/constants.dart';
 import 'package:instaflutter/app/modules/feed/feed_store.dart';
 import 'package:instaflutter/app/shared/util/LoadingWidget.dart';
 
@@ -20,7 +21,11 @@ class FeedPageState extends ModularState<FeedPage, FeedStore> {
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt)),
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.chat))
+            IconButton(
+                onPressed: () {
+                  Modular.to.pushNamed(Constants.Routes.CHAT);
+                },
+                icon: Icon(Icons.chat))
           ],
         ),
         body: Observer(builder: (context) {

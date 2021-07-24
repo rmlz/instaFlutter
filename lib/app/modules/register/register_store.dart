@@ -50,7 +50,8 @@ abstract class _RegisterStoreBase with Store {
       'displayName': name,
       'following': [],
       'followers': [],
-      'profilePicture': null
+      'profilePicture': null,
+      'id': user!.uid
     });
 
     loading = false;

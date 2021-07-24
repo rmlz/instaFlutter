@@ -130,7 +130,7 @@ class SearchPageState extends ModularState<SearchPage, SearchStore> {
 
                   return Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                       child: InkWell(
                         child: Row(
                           children: [
@@ -145,7 +145,17 @@ class SearchPageState extends ModularState<SearchPage, SearchStore> {
                             ),
                             Column(
                               children: [
-                                Text(user['displayName']),
+                                Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      24 -
+                                      72 -
+                                      12,
+                                  child: Text(user['displayName'],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24,
+                                      )),
+                                ),
                                 Container(
                                     width: MediaQuery.of(context).size.width -
                                         24 -

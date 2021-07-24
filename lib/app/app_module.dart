@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:instaflutter/app/constants.dart';
+import 'package:instaflutter/app/modules/chat/chat_module.dart';
 import 'package:instaflutter/app/shared/util/app_route_guard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:instaflutter/app/modules/onboarding/onboarding_module.dart';
@@ -50,7 +51,8 @@ class AppModule extends Module {
             module: SearchModule(), guards: [_routeGuard]),
         ModuleRoute(Constants.Routes.PROFILE,
             module: ProfileModule(), guards: [_routeGuard]),
-        ModuleRoute(Constant.Routes.Chat)
+        ModuleRoute(Constants.Routes.CHAT,
+            module: ChatModule(), guards: [_routeGuard])
       ];
 
   Module _initialModule() {

@@ -19,6 +19,9 @@ class _Routes {
   final SEARCH = '/search';
   final PROFILE = '/profile';
   final EDIT_PROFILE = '/edit_profile';
+
+  final CHAT = '/chat';
+  final CHAT_SCREEN = '/chatscr';
 }
 
 class _Pictures {
@@ -29,4 +32,5 @@ class _Pictures {
 class _Collections {
   final USERS = 'user';
   final POSTS = 'posts';
+  final CHATS = 'chats';
 }

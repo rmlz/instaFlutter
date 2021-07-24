@@ -29,6 +29,7 @@ abstract class _FeedStoreBase with Store {
     posts = firebaseFirestore
         .collection(Constants.Collections.POSTS)
         .where('userId', whereIn: following)
+        .orderBy('dateTime', descending: true)
         .snapshots();
   }
 
