@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instaflutter/app/constants.dart';
+import 'package:instamon/app/constants.dart';
 import 'package:mobx/mobx.dart';
 
 part 'feed_store.g.dart';

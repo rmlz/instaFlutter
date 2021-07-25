@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/profile/profile_store.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/profile/profile_store.dart';
 import 'package:mobx/mobx.dart';
 
 class ProfilePage extends StatefulWidget {

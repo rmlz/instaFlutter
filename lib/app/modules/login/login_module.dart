@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/login/login_store.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/login/login_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'login_page.dart';
 import 'forgot_password_page.dart';
@@ -14,10 +14,8 @@ class LoginModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (context, args) => LoginPage()),
-    ChildRoute(
-      Constants.Routes.FORGOT_PASSWORD,
-      child: (context, args) => ForgotPasswordPage(),
-      transition: TransitionType.rightToLeftWithFade
-    ),
+    ChildRoute(Constants.Routes.FORGOT_PASSWORD,
+        child: (context, args) => ForgotPasswordPage(),
+        transition: TransitionType.rightToLeftWithFade),
   ];
 }

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instaflutter/app/modules/search/search_store.dart';
+import 'package:instamon/app/modules/search/search_store.dart';
 
 class SearchPage extends StatefulWidget {
   final String title;

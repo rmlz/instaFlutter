@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/chat/chatList_page.dart';
-import 'package:instaflutter/app/modules/chat/chat_page.dart';
-import 'package:instaflutter/app/modules/chat/chat_store.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/chat/chatList_page.dart';
+import 'package:instamon/app/modules/chat/chat_page.dart';
+import 'package:instamon/app/modules/chat/chat_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ChatModule extends Module {

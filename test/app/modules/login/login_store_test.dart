@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:instaflutter/app/modules/login/login_store.dart';
- 
+import 'package:instamon/app/modules/login/login_store.dart';
+
 void main() {
   late LoginStore store;
 

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instaflutter/app/modules/feed/feed_store.dart';
+import 'package:instamon/app/modules/feed/feed_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'feed_page.dart';

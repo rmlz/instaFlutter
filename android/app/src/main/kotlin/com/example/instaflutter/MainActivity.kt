@@ -1,4 +1,4 @@
-package com.example.instaflutter
+package com.rbdev.instamon
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/register/register_store.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/register/register_store.dart';
 import 'package:mobx/mobx.dart';
 
 class RegisterPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:instaflutter/app/modules/feed/feed_store.dart';
- 
+import 'package:instamon/app/modules/feed/feed_store.dart';
+
 void main() {
   late FeedStore store;
 

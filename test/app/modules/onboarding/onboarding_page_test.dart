@@ -1,4 +1,4 @@
-import 'package:instaflutter/app/modules/onboarding/onboarding_page.dart';
+import 'package:instamon/app/modules/onboarding/onboarding_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular_test/flutter_modular_test.dart';
 

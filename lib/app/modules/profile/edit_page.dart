@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instaflutter/app/modules/profile/profile_module.dart';
-import 'package:instaflutter/app/modules/profile/profile_store.dart';
+import 'package:instamon/app/modules/profile/profile_module.dart';
+import 'package:instamon/app/modules/profile/profile_store.dart';
 import 'package:mobx/mobx.dart';
 
 class EditPage extends StatefulWidget {
@@ -16,6 +16,7 @@ class EditPage extends StatefulWidget {
 class EditPageState extends ModularState<EditPage, ProfileStore> {
   late final TextEditingController _nameController;
   late final TextEditingController _bioController;
+  late final TextEditingController _emailController;
 
   late final ImagePicker _picker;
 
@@ -24,6 +25,7 @@ class EditPageState extends ModularState<EditPage, ProfileStore> {
     super.initState();
     _nameController = TextEditingController(text: store.user?.displayName);
     _bioController = TextEditingController(text: store.bio);
+    _emailController = TextEditingController(text: store.user?.email);
     _picker = ImagePicker();
     reaction((_) => store.user, (_) {
       _nameController.text = store.user?.displayName ?? '';
@@ -149,11 +151,19 @@ class EditPageState extends ModularState<EditPage, ProfileStore> {
             label: 'Nome:',
             controller: _nameController,
             maxLength: 30,
+            enable: true,
           ),
           _EditField(
             label: 'Bio:',
             controller: _bioController,
             maxLength: 150,
+            enable: true,
+          ),
+          _EditField(
+            label: 'Email:',
+            controller: _emailController,
+            maxLength: 150,
+            enable: false,
           ),
         ],
       ),
@@ -165,8 +175,13 @@ class _EditField extends StatelessWidget {
   String label;
   TextEditingController controller;
   int? maxLength;
+  bool enable;
 
-  _EditField({required this.label, required this.controller, this.maxLength});
+  _EditField(
+      {required this.label,
+      required this.controller,
+      this.maxLength,
+      required this.enable});
 
   @override
   Widget build(BuildContext context) {
@@ -187,6 +202,7 @@ class _EditField extends StatelessWidget {
           Flexible(
               child: Container(
             child: TextFormField(
+              enabled: enable,
               controller: controller,
               minLines: 1,
               maxLines: 10,
@@ -195,6 +211,10 @@ class _EditField extends StatelessWidget {
                 errorBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 disabledBorder: InputBorder.none,
+                labelStyle: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold),
+                labelText: enable ? '' : 'Não é possível editar',
                 isDense: true,
               ),
               maxLength: maxLength,

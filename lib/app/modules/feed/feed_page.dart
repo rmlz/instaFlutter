@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/feed/feed_store.dart';
-import 'package:instaflutter/app/shared/util/LoadingWidget.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/feed/feed_store.dart';
+import 'package:instamon/app/shared/util/LoadingWidget.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class FeedPageState extends ModularState<FeedPage, FeedStore> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("InstaFlutter"),
+          title: Text("instamon"),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt)),
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),

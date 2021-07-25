@@ -1,15 +1,14 @@
-import 'package:instaflutter/app/constants.dart';
+import 'package:instamon/app/constants.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'onboarding_store.g.dart';
 
 class OnboardingStore = _OnboardingStoreBase with _$OnboardingStore;
-abstract class _OnboardingStoreBase with Store {
 
+abstract class _OnboardingStoreBase with Store {
   SharedPreferences _sharedPreferences;
   _OnboardingStoreBase(this._sharedPreferences);
-
 
   @action
   markOnboardingDone() {
@@ -20,5 +19,4 @@ abstract class _OnboardingStoreBase with Store {
   markRegisterDone() {
     _sharedPreferences.setBool(Constants.SPK_REGISTER_DONE, true);
   }
-
 }

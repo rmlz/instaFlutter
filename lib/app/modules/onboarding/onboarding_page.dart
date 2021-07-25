@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/onboarding/onboarding_store.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/onboarding/onboarding_store.dart';
 
 class OnboardingPage extends StatefulWidget {
   final String title;
-  const OnboardingPage({Key? key, this.title = 'Instaflutter'})
-      : super(key: key);
+  const OnboardingPage({Key? key, this.title = 'instamon'}) : super(key: key);
   @override
   OnboardingPageState createState() => OnboardingPageState();
 }

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:instaflutter/app/constants.dart';
-import 'package:instaflutter/app/modules/chat/chat_store.dart';
-import 'package:instaflutter/app/shared/util/LoadingWidget.dart';
+import 'package:instamon/app/constants.dart';
+import 'package:instamon/app/modules/chat/chat_store.dart';
+import 'package:instamon/app/shared/util/LoadingWidget.dart';
 
 class ChatPage extends StatefulWidget {
   final id;

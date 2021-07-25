@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1007653068804:android:14d332f01173df1fa5d551",
+        "mobilesdk_app_id": "1:1007653068804:android:aed67b028f8d883aa5d551",
         "android_client_info": {
-          "package_name": "com.example.instaflutter"
+          "package_name": "com.rbdev.instamon"
         }
       },
       "oauth_client": [
